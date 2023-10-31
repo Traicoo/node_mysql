@@ -5,17 +5,23 @@ const mysql = require("mysql2")
 
 const app = express ()
 
+// definindo handlebars como template engine
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")
 
+//pasta de arquivos estaticos como CSS, imagens
 app.use(express.static("public"))
 
+// trabalhar com dados em formato json
 app.use(express.urlencoded({
     extended: true
 }))
 
+// CRUD => CREATE, READ, UPDATE, DELETE
+
 app.use(express.json())
 
+//rotas
 app.post("/register/save", (req, res) => {
     const { title, pageqty} = req.body
 
@@ -30,7 +36,7 @@ app.post("/register/save", (req, res) => {
             return
         }
 
-        response.redirect("/")
+        res.redirect("/")
     })
 })
 
@@ -39,9 +45,20 @@ app.get("/register", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    res.render("home")
+    const sql = 'SELECT * FROM books'
+
+    conn.query(sql, (error, data) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        const books = data
+
+        res.render("home", { books })
+    })
 })
 
+// conexão com mysql
 const conn = mysql.createConnection({
     host: "localhost",
     user: "root",
