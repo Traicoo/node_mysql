@@ -21,7 +21,7 @@ header {
 }
 
 header h1 {
-
+    margin-bottom: 1rem;
 }
 
 header ul {
@@ -50,11 +50,13 @@ main > h2 {
     gap: 1rem;
 }
 
-.bottons a {
+.bottons a,
+.buttons button{
     display: block;
     text-decoration: none;
     padding: .5rem;
     border-radius: .5rem;
+    font-size: 1rem;
 }
 
 .bottons .mais {
@@ -77,4 +79,16 @@ main > h2 {
 .bottons .editar:hover {
     background: white;
     color: #ffc107;
+}
+
+.bottons .exluir {
+    border: 1px solid #dc3545;
+    background: #dc3545;
+    color: white;
+}
+
+.bottons .excluir:hover {
+    background: white;
+    color: #dc3545;
+    cursor: pointer;
 }
